@@ -1,7 +1,8 @@
-// marcel.mula@estudiantat.upc.edu
-// paula.quetineau@estudiantat.upc.edu
-#include "Cjt_estudiants.hh"
+// marcel.mula@estudiantat.upc.edu L12
+// paula.quetineau@estudiantat.upc.edu L42
 
+#include "Cjt_estudiants.hh"
+#include <iostream>
 /* Pre: index is a valid index*/
 /* Post: The return value is an iterator to the element pointed by index*/
 vector<Estudiant>::const_iterator index_to_iterator(const vector<Estudiant>& vest, int index){
@@ -14,7 +15,7 @@ vector<Estudiant>::const_iterator index_to_iterator(const vector<Estudiant>& ves
 /* Post: b = indica si el p.i. original conté un estudiant amb el dni d'est;
    si b = fals, s'ha afegit l'estudiant est al paràmetre implícit */
 void Cjt_estudiants::afegir_estudiant(const Estudiant &est, bool& b){
-    int index = Cjt_estudiants::cerca_dicot(this->vest,0, this->mida(), est.consultar_DNI());
+    int index = Cjt_estudiants::cerca_dicot(this->vest,0, this->mida()-1, est.consultar_DNI());
     if(this->vest[index].consultar_DNI() == est.consultar_DNI()){
         b = true;
     }else{
@@ -30,13 +31,13 @@ void Cjt_estudiants::afegir_estudiant(const Estudiant &est, bool& b){
    amb el dni dni; si b, aquest estudiant ha quedat eliminat
    del paràmetre implícit */
 void Cjt_estudiants::esborrar_estudiant(int dni, bool& b){
-    int index = Cjt_estudiants::cerca_dicot(this->vest,0, this->mida(), dni);
+    int index = Cjt_estudiants::cerca_dicot(this->vest,0, this->mida()-1, dni);
     if(this->vest[index].consultar_DNI() != dni){
         b = false;
     }else{
+        if(vest[index].te_nota())this->decrementar_interval(vest[index].consultar_nota());
         this->vest.erase(index_to_iterator(this->vest, index));
         --this->nest;
-        if(vest[index].te_nota())this->decrementar_interval(vest[index].consultar_nota());
         b = true;
     }
 }
