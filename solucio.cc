@@ -4,9 +4,9 @@
 
 /* Pre: index is a valid index*/
 /* Post: The return value is an iterator to the element pointed by index*/
-vector<Estudiant>::iterator index_to_iterator(const vector<Estudiant>&vest, int index){
+vector<Estudiant>::const_iterator index_to_iterator(const vector<Estudiant>& vest, int index){
     auto it = vest.begin();
-    for(int i = 0; i<index+1;++i)++vest;
+    for(int i = 0; i<index+1;++i)++it;
     return it;
 };
 
@@ -18,7 +18,7 @@ void Cjt_estudiants::afegir_estudiant(const Estudiant &est, bool& b){
     if(this->vest[index].consultar_DNI() == est.consultar_DNI()){
         b = true;
     }else{
-      this->vest.insert(index_to_iterator(index), est);
+      this->vest.insert(index_to_iterator(this->vest, index), est);
       if(est.te_nota())this->incrementar_interval(est.consultar_nota());
     }
 }
@@ -32,8 +32,8 @@ void Cjt_estudiants::esborrar_estudiant(int dni, bool& b){
     if(this->vest[index].consultar_DNI() != dni){
         b = false;
     }else{
-      this->vest.erase(index_to_iterator(index));
-      if(est.te_nota())this->decrementar_interval(vest[index].consultar_nota());
+      this->vest.erase(index_to_iterator(this->vest, index));
+      if(vest[index].te_nota())this->decrementar_interval(vest[index].consultar_nota());
     }
 }
 
@@ -46,7 +46,7 @@ void Cjt_estudiants::incrementar_interval(double x){
     ++this->intervals[floor];
 };
 
-/* Pre: x és una nota vàlida 
+/* Pre: x és una nota vàlida */
 /* Post: al paràmetre implícit, s'ha decrementat en una unitat el valor de
    la posició d'"intervals" corresponent a x */
 void Cjt_estudiants::decrementar_interval(double x){
