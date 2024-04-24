@@ -2,24 +2,28 @@
 // paula.quetineau@estudiantat.upc.edu L42
 
 #include "Cjt_estudiants.hh"
-#include <iostream>
-/* Pre: index is a valid index*/
-/* Post: The return value is an iterator to the element pointed by index*/
-vector<Estudiant>::const_iterator index_to_iterator(const vector<Estudiant>& vest, int index){
-    auto it = vest.begin();
-    for(int i = 0; i<index;++i)++it;
-    return it;
-};
 
+void insert(vector<Estudiant>& vest, int index, int nest, const Estudiant& est){
+    for(int i = nest-1; i>=index; --i)vest[i+1] = vest[i];
+    vest[index] = est;
+}
+
+void erase(vector<Estudiant>& vest, int index, int nest){
+    for(int i = index; i<nest-1; ++i)vest[i] = vest[i+1];
+    vest[nest-1] = Estudiant();
+}
 /* Pre: el paràmetre implícit no està ple */
 /* Post: b = indica si el p.i. original conté un estudiant amb el dni d'est;
    si b = fals, s'ha afegit l'estudiant est al paràmetre implícit */
-void Cjt_estudiants::afegir_estudiant(const Estudiant &est, bool& b){
-    int index = Cjt_estudiants::cerca_dicot(this->vest,0, this->mida()-1, est.consultar_DNI());
+void Cjt_estudiants::afegir_estudiant(const Estudiant& est, bool& b){
+    int index = 0; //All of this mess because the Pre of cerca_dicot is super strict 
+    if(this->nest > 1)index = Cjt_estudiants::cerca_dicot(this->vest, 0, this->nest-1, est.consultar_DNI());
+    else if(this->nest == 1)index = this->vest[0].consultar_DNI() > est.consultar_DNI(); 
+
     if(this->vest[index].consultar_DNI() == est.consultar_DNI()){
         b = true;
     }else{
-        this->vest.insert(index_to_iterator(this->vest, index), est);
+        insert(this->vest, index, this->nest, est);
         ++this->nest;
         if(est.te_nota())this->incrementar_interval(est.consultar_nota());
         b = false;
@@ -31,12 +35,15 @@ void Cjt_estudiants::afegir_estudiant(const Estudiant &est, bool& b){
    amb el dni dni; si b, aquest estudiant ha quedat eliminat
    del paràmetre implícit */
 void Cjt_estudiants::esborrar_estudiant(int dni, bool& b){
-    int index = Cjt_estudiants::cerca_dicot(this->vest,0, this->mida()-1, dni);
+    int index = 0;
+    if(this->nest > 1)index = Cjt_estudiants::cerca_dicot(this->vest,0, this->nest-1, dni);
+    else if(this->nest == 1)index = this->vest[0].consultar_DNI() > dni; 
+
     if(this->vest[index].consultar_DNI() != dni){
         b = false;
     }else{
         if(vest[index].te_nota())this->decrementar_interval(vest[index].consultar_nota());
-        this->vest.erase(index_to_iterator(this->vest, index));
+        erase(this->vest, index, this->nest);
         --this->nest;
         b = true;
     }
