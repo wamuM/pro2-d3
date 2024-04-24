@@ -1,8 +1,17 @@
 #include "Cjt_estudiants.hh" 
-void afegir_estudiant(const Estudiant &est, bool& b);
 /* Pre: el paràmetre implícit no està ple */
 /* Post: b = indica si el p.i. original conté un estudiant amb el dni d'est;
    si b = fals, s'ha afegit l'estudiant est al paràmetre implícit */
+void Cjt_estudiants::afegir_estudiant(const Estudiant &est, bool& b) {
+    if (b) return;
+    else {
+        vest.push_back(est);
+        ordenar();
+        ++nest;
+        return;
+    }
+}
+
 
 void esborrar_estudiant(int dni, bool& b);
 /* Pre: cert */
