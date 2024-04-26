@@ -3,12 +3,12 @@
 
 #include "Cjt_estudiants.hh"
 
-void insert(vector<Estudiant>& vest, int index, int nest, const Estudiant& est){
+void insert(vector<Estudiant>& vest, const int& index, const int& nest, const Estudiant& est){
     for(int i = nest; i>index; --i)vest[i] = vest[i-1];
     vest[index] = est;
 }
 
-void erase(vector<Estudiant>& vest, int index, int nest){
+void erase(vector<Estudiant>& vest, const int& index, const int& nest){
     for(int i = index; i<nest-1; ++i)vest[i] = vest[i+1];
     vest[nest-1] = Estudiant();
 }

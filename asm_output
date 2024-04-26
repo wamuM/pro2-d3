@@ -1,0 +1,429 @@
+	.file	"solucio.cc"
+	.text
+#APP
+	.globl _ZSt21ios_base_library_initv
+#NO_APP
+	.p2align 4
+	.globl	_Z6insertRSt6vectorI9EstudiantSaIS0_EERKiS5_RKS0_
+	.type	_Z6insertRSt6vectorI9EstudiantSaIS0_EERKiS5_RKS0_, @function
+_Z6insertRSt6vectorI9EstudiantSaIS0_EERKiS5_RKS0_:
+.LFB2367:
+	.cfi_startproc
+	movq	%rdi, %rax
+	movl	(%rdx), %edx
+	movslq	(%rsi), %rdi
+	movq	(%rax), %r8
+	cmpl	%edi, %edx
+	jle	.L2
+	movslq	%edx, %rax
+	leaq	(%rax,%rax,2), %rax
+	leaq	(%r8,%rax,8), %rax
+	.p2align 4,,10
+	.p2align 3
+.L3:
+	movzbl	-8(%rax), %edi
+	movdqu	-24(%rax), %xmm0
+	subl	$1, %edx
+	subq	$24, %rax
+	movups	%xmm0, 24(%rax)
+	movb	%dil, 40(%rax)
+	movslq	(%rsi), %rdi
+	cmpl	%edi, %edx
+	jg	.L3
+.L2:
+	movdqu	(%rcx), %xmm1
+	leaq	(%rdi,%rdi,2), %rax
+	leaq	(%r8,%rax,8), %rax
+	movups	%xmm1, (%rax)
+	movzbl	16(%rcx), %edx
+	movb	%dl, 16(%rax)
+	ret
+	.cfi_endproc
+.LFE2367:
+	.size	_Z6insertRSt6vectorI9EstudiantSaIS0_EERKiS5_RKS0_, .-_Z6insertRSt6vectorI9EstudiantSaIS0_EERKiS5_RKS0_
+	.p2align 4
+	.globl	_Z5eraseRSt6vectorI9EstudiantSaIS0_EERKiS5_
+	.type	_Z5eraseRSt6vectorI9EstudiantSaIS0_EERKiS5_, @function
+_Z5eraseRSt6vectorI9EstudiantSaIS0_EERKiS5_:
+.LFB2368:
+	.cfi_startproc
+	pushq	%rbp
+	.cfi_def_cfa_offset 16
+	.cfi_offset 6, -16
+	movq	%rdi, %rbp
+	pushq	%rbx
+	.cfi_def_cfa_offset 24
+	.cfi_offset 3, -24
+	movq	%rdx, %rbx
+	subq	$40, %rsp
+	.cfi_def_cfa_offset 64
+	movl	(%rdx), %eax
+	movl	(%rsi), %esi
+	subl	$1, %eax
+	cmpl	%eax, %esi
+	jge	.L7
+	movslq	%esi, %rax
+	leaq	(%rax,%rax,2), %rdx
+	movq	(%rdi), %rax
+	leaq	(%rax,%rdx,8), %rax
+	.p2align 4,,10
+	.p2align 3
+.L8:
+	movzbl	40(%rax), %ecx
+	movdqu	24(%rax), %xmm0
+	addl	$1, %esi
+	addq	$24, %rax
+	movb	%cl, -8(%rax)
+	movups	%xmm0, -24(%rax)
+	movl	(%rbx), %edi
+	leal	-1(%rdi), %ecx
+	cmpl	%ecx, %esi
+	jl	.L8
+.L7:
+	movq	%rsp, %rdi
+	call	_ZN9EstudiantC1Ev
+	movl	(%rbx), %eax
+	movq	0(%rbp), %rdx
+	movq	%rsp, %rdi
+	movdqa	(%rsp), %xmm1
+	subl	$1, %eax
+	cltq
+	leaq	(%rax,%rax,2), %rax
+	leaq	(%rdx,%rax,8), %rax
+	movups	%xmm1, (%rax)
+	movzbl	16(%rsp), %edx
+	movb	%dl, 16(%rax)
+	call	_ZN9EstudiantD1Ev
+	addq	$40, %rsp
+	.cfi_def_cfa_offset 24
+	popq	%rbx
+	.cfi_def_cfa_offset 16
+	popq	%rbp
+	.cfi_def_cfa_offset 8
+	ret
+	.cfi_endproc
+.LFE2368:
+	.size	_Z5eraseRSt6vectorI9EstudiantSaIS0_EERKiS5_, .-_Z5eraseRSt6vectorI9EstudiantSaIS0_EERKiS5_
+	.align 2
+	.p2align 4
+	.globl	_ZN14Cjt_estudiants16afegir_estudiantERK9EstudiantRb
+	.type	_ZN14Cjt_estudiants16afegir_estudiantERK9EstudiantRb, @function
+_ZN14Cjt_estudiants16afegir_estudiantERK9EstudiantRb:
+.LFB2369:
+	.cfi_startproc
+	pushq	%r15
+	.cfi_def_cfa_offset 16
+	.cfi_offset 15, -16
+	pushq	%r14
+	.cfi_def_cfa_offset 24
+	.cfi_offset 14, -24
+	pushq	%r13
+	.cfi_def_cfa_offset 32
+	.cfi_offset 13, -32
+	movq	%rdx, %r13
+	pushq	%r12
+	.cfi_def_cfa_offset 40
+	.cfi_offset 12, -40
+	pushq	%rbp
+	.cfi_def_cfa_offset 48
+	.cfi_offset 6, -48
+	movq	%rsi, %rbp
+	pushq	%rbx
+	.cfi_def_cfa_offset 56
+	.cfi_offset 3, -56
+	movq	%rdi, %rbx
+	subq	$8, %rsp
+	.cfi_def_cfa_offset 64
+	movl	24(%rdi), %r12d
+	testl	%r12d, %r12d
+	jne	.L12
+	movb	$0, (%rdx)
+	xorl	%r14d, %r14d
+.L13:
+	movq	%rbp, %rdi
+	call	_ZNK9Estudiant7te_notaEv
+	testb	%al, %al
+	jne	.L29
+.L17:
+	movl	24(%rbx), %esi
+	movq	(%rbx), %rdi
+	cmpl	%esi, %r12d
+	jge	.L21
+	movslq	%esi, %rax
+	leaq	(%rax,%rax,2), %rdx
+	salq	$3, %rdx
+	leaq	-24(%rdi,%rdx), %rcx
+	leaq	(%rdi,%rdx), %rax
+	leal	-1(%rsi), %edx
+	subl	%r12d, %edx
+	leaq	(%rdx,%rdx,2), %rdx
+	salq	$3, %rdx
+	subq	%rdx, %rcx
+	.p2align 4,,10
+	.p2align 3
+.L20:
+	movdqu	-24(%rax), %xmm1
+	movzbl	-8(%rax), %edx
+	subq	$24, %rax
+	movups	%xmm1, 24(%rax)
+	movb	%dl, 40(%rax)
+	cmpq	%rax, %rcx
+	jne	.L20
+.L21:
+	movdqu	0(%rbp), %xmm2
+	addl	$1, %esi
+	movups	%xmm2, (%rdi,%r14)
+	movzbl	16(%rbp), %eax
+	movb	%al, 16(%rdi,%r14)
+	movl	%esi, 24(%rbx)
+	addq	$8, %rsp
+	.cfi_remember_state
+	.cfi_def_cfa_offset 56
+	popq	%rbx
+	.cfi_def_cfa_offset 48
+	popq	%rbp
+	.cfi_def_cfa_offset 40
+	popq	%r12
+	.cfi_def_cfa_offset 32
+	popq	%r13
+	.cfi_def_cfa_offset 24
+	popq	%r14
+	.cfi_def_cfa_offset 16
+	popq	%r15
+	.cfi_def_cfa_offset 8
+	ret
+	.p2align 4,,10
+	.p2align 3
+.L12:
+	.cfi_restore_state
+	cmpl	$1, %r12d
+	je	.L30
+	movq	%rsi, %rdi
+	call	_ZNK9Estudiant13consultar_DNIEv
+	xorl	%esi, %esi
+	movq	%rbx, %rdi
+	movl	%eax, %ecx
+	movl	24(%rbx), %eax
+	leal	-1(%rax), %edx
+	call	_ZN14Cjt_estudiants11cerca_dicotERKSt6vectorI9EstudiantSaIS1_EEiii
+	movl	%eax, %r12d
+.L15:
+	movslq	%r12d, %rax
+	movq	(%rbx), %rdi
+	leaq	(%rax,%rax,2), %r14
+	salq	$3, %r14
+	addq	%r14, %rdi
+	call	_ZNK9Estudiant13consultar_DNIEv
+	movq	%rbp, %rdi
+	movl	%eax, %r15d
+	call	_ZNK9Estudiant13consultar_DNIEv
+	cmpl	%eax, %r15d
+	sete	0(%r13)
+	jne	.L13
+	addq	$8, %rsp
+	.cfi_remember_state
+	.cfi_def_cfa_offset 56
+	popq	%rbx
+	.cfi_def_cfa_offset 48
+	popq	%rbp
+	.cfi_def_cfa_offset 40
+	popq	%r12
+	.cfi_def_cfa_offset 32
+	popq	%r13
+	.cfi_def_cfa_offset 24
+	popq	%r14
+	.cfi_def_cfa_offset 16
+	popq	%r15
+	.cfi_def_cfa_offset 8
+	ret
+	.p2align 4,,10
+	.p2align 3
+.L30:
+	.cfi_restore_state
+	movq	(%rdi), %rdi
+	call	_ZNK9Estudiant13consultar_DNIEv
+	movq	%rbp, %rdi
+	movl	%eax, %r12d
+	call	_ZNK9Estudiant13consultar_DNIEv
+	cmpl	%eax, %r12d
+	setl	%r12b
+	movzbl	%r12b, %r12d
+	jmp	.L15
+	.p2align 4,,10
+	.p2align 3
+.L29:
+	movq	%rbp, %rdi
+	call	_ZNK9Estudiant14consultar_notaEv
+	cvttsd2sil	%xmm0, %edx
+	movslq	%edx, %rax
+	salq	$2, %rax
+	cmpl	$10, %edx
+	movl	$36, %edx
+	cmove	%rdx, %rax
+	addq	32(%rbx), %rax
+	addl	$1, (%rax)
+	jmp	.L17
+	.cfi_endproc
+.LFE2369:
+	.size	_ZN14Cjt_estudiants16afegir_estudiantERK9EstudiantRb, .-_ZN14Cjt_estudiants16afegir_estudiantERK9EstudiantRb
+	.align 2
+	.p2align 4
+	.globl	_ZN14Cjt_estudiants18esborrar_estudiantEiRb
+	.type	_ZN14Cjt_estudiants18esborrar_estudiantEiRb, @function
+_ZN14Cjt_estudiants18esborrar_estudiantEiRb:
+.LFB2370:
+	.cfi_startproc
+	pushq	%r14
+	.cfi_def_cfa_offset 16
+	.cfi_offset 14, -16
+	pushq	%r13
+	.cfi_def_cfa_offset 24
+	.cfi_offset 13, -24
+	pushq	%r12
+	.cfi_def_cfa_offset 32
+	.cfi_offset 12, -32
+	pushq	%rbp
+	.cfi_def_cfa_offset 40
+	.cfi_offset 6, -40
+	movq	%rdx, %rbp
+	pushq	%rbx
+	.cfi_def_cfa_offset 48
+	.cfi_offset 3, -48
+	subq	$16, %rsp
+	.cfi_def_cfa_offset 64
+	movl	24(%rdi), %edx
+	testl	%edx, %edx
+	je	.L46
+	movq	%rdi, %rbx
+	movl	%esi, %r12d
+	cmpl	$1, %edx
+	jne	.L47
+	xorl	%r13d, %r13d
+	xorl	%r14d, %r14d
+.L34:
+	movq	(%rbx), %rdi
+	movl	%r14d, 12(%rsp)
+	addq	%r13, %rdi
+	call	_ZNK9Estudiant13consultar_DNIEv
+	cmpl	%eax, %r12d
+	je	.L35
+.L46:
+	movb	$0, 0(%rbp)
+.L31:
+	addq	$16, %rsp
+	.cfi_remember_state
+	.cfi_def_cfa_offset 48
+	popq	%rbx
+	.cfi_def_cfa_offset 40
+	popq	%rbp
+	.cfi_def_cfa_offset 32
+	popq	%r12
+	.cfi_def_cfa_offset 24
+	popq	%r13
+	.cfi_def_cfa_offset 16
+	popq	%r14
+	.cfi_def_cfa_offset 8
+	ret
+	.p2align 4,,10
+	.p2align 3
+.L47:
+	.cfi_restore_state
+	movl	%esi, %ecx
+	subl	$1, %edx
+	xorl	%esi, %esi
+	call	_ZN14Cjt_estudiants11cerca_dicotERKSt6vectorI9EstudiantSaIS1_EEiii
+	movl	%eax, %r14d
+	cltq
+	leaq	(%rax,%rax,2), %r13
+	salq	$3, %r13
+	jmp	.L34
+	.p2align 4,,10
+	.p2align 3
+.L35:
+	cmpl	%r14d, 24(%rbx)
+	setg	0(%rbp)
+	jle	.L31
+	movq	(%rbx), %rdi
+	addq	%r13, %rdi
+	call	_ZNK9Estudiant7te_notaEv
+	testb	%al, %al
+	jne	.L48
+.L38:
+	leaq	24(%rbx), %rdx
+	leaq	12(%rsp), %rsi
+	movq	%rbx, %rdi
+	call	_Z5eraseRSt6vectorI9EstudiantSaIS0_EERKiS5_
+	subl	$1, 24(%rbx)
+	addq	$16, %rsp
+	.cfi_remember_state
+	.cfi_def_cfa_offset 48
+	popq	%rbx
+	.cfi_def_cfa_offset 40
+	popq	%rbp
+	.cfi_def_cfa_offset 32
+	popq	%r12
+	.cfi_def_cfa_offset 24
+	popq	%r13
+	.cfi_def_cfa_offset 16
+	popq	%r14
+	.cfi_def_cfa_offset 8
+	ret
+	.p2align 4,,10
+	.p2align 3
+.L48:
+	.cfi_restore_state
+	movq	(%rbx), %rdi
+	addq	%r13, %rdi
+	call	_ZNK9Estudiant14consultar_notaEv
+	cvttsd2sil	%xmm0, %edx
+	movslq	%edx, %rax
+	salq	$2, %rax
+	cmpl	$10, %edx
+	movl	$36, %edx
+	cmove	%rdx, %rax
+	addq	32(%rbx), %rax
+	subl	$1, (%rax)
+	jmp	.L38
+	.cfi_endproc
+.LFE2370:
+	.size	_ZN14Cjt_estudiants18esborrar_estudiantEiRb, .-_ZN14Cjt_estudiants18esborrar_estudiantEiRb
+	.align 2
+	.p2align 4
+	.globl	_ZN14Cjt_estudiants20incrementar_intervalEd
+	.type	_ZN14Cjt_estudiants20incrementar_intervalEd, @function
+_ZN14Cjt_estudiants20incrementar_intervalEd:
+.LFB2371:
+	.cfi_startproc
+	cvttsd2sil	%xmm0, %edx
+	movslq	%edx, %rax
+	salq	$2, %rax
+	cmpl	$10, %edx
+	movl	$36, %edx
+	cmove	%rdx, %rax
+	addq	32(%rdi), %rax
+	addl	$1, (%rax)
+	ret
+	.cfi_endproc
+.LFE2371:
+	.size	_ZN14Cjt_estudiants20incrementar_intervalEd, .-_ZN14Cjt_estudiants20incrementar_intervalEd
+	.align 2
+	.p2align 4
+	.globl	_ZN14Cjt_estudiants20decrementar_intervalEd
+	.type	_ZN14Cjt_estudiants20decrementar_intervalEd, @function
+_ZN14Cjt_estudiants20decrementar_intervalEd:
+.LFB2372:
+	.cfi_startproc
+	cvttsd2sil	%xmm0, %edx
+	movslq	%edx, %rax
+	salq	$2, %rax
+	cmpl	$10, %edx
+	movl	$36, %edx
+	cmove	%rdx, %rax
+	addq	32(%rdi), %rax
+	subl	$1, (%rax)
+	ret
+	.cfi_endproc
+.LFE2372:
+	.size	_ZN14Cjt_estudiants20decrementar_intervalEd, .-_ZN14Cjt_estudiants20decrementar_intervalEd
+	.ident	"GCC: (GNU) 13.2.1 20240316 (Red Hat 13.2.1-7)"
+	.section	.note.GNU-stack,"",@progbits
