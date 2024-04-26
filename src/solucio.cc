@@ -16,6 +16,7 @@ void erase(vector<Estudiant>& vest, const int& index, const int& nest){
 /* Post: b = indica si el p.i. original conté un estudiant amb el dni d'est;
    si b = fals, s'ha afegit l'estudiant est al paràmetre implícit */
 void Cjt_estudiants::afegir_estudiant(const Estudiant& est, bool& b){
+    //Totes aquestes condicions estan perque la PRE de cerca_dicot no permet que nest sigui 0 o 1
     int index;
     if(this->nest == 0){
         index = 0;
@@ -46,7 +47,7 @@ void Cjt_estudiants::esborrar_estudiant(int dni, bool& b){
         if(this->nest == 1)index = 0;
         else index = Cjt_estudiants::cerca_dicot(this->vest,0, this->nest-1, dni);
     
-        b = this->vest[index].consultar_DNI() == dni && index < this->nest;
+        b = index < this->nest and this->vest[index].consultar_DNI() == dni;
     }
     if(not b)return;
 
