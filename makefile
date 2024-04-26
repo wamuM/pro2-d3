@@ -1,12 +1,17 @@
 CC := g++
 FLAGS := -D_JUDGE_ -D_GLIBCXX_DEBUG -O2 -Wall -Wextra -Werror -Wno-sign-compare -std=c++11 -fno-extended-identifiers
 
-program: pro2.o Estudiant.o solucio.o Cjt_estudiants.o
+./target/program: ./obj/pro2.o ./obj/Estudiant.o ./obj/solucio.o ./obj/Cjt_estudiants.o
 	$(CC) $(FLAGS) -o $@ $^ 
-%.o: %.cc
-	$(CC) $(FLAGS) -c $< 
+./obj/%.o: ./src/%.cc
+	$(CC) $(FLAGS) -c $< -o $@
 
-.PHONY := clean
-
+.PHONY = clean test check
 clean:
-	rm -rf program *.o *.out 
+	rm -rf ./target/* ./obj/*
+test: 
+	./target/program < ./tests/sample.inp > ./target/output
+check: ./target/output
+	diff ./target/output ./tests/sample.cor
+
+
